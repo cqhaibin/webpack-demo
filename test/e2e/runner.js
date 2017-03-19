@@ -1,10 +1,31 @@
-var webDriver = require('selenium-webdriver');
-var driverServer = require('selenium-server');
-debugger;
-var By = webDriver.By;
-process.env.SELENIUM_BROWSER = require('chromedriver').path;
-console.log(driverServer.path);
+/*eslint-disable*/
 
-var driver = new webDriver.Builder().forBrowser('chrome').usingServer(driverServer.path).build();
-driver.get('http://www.baidu.com');
-driver.quit();
+module.exports = {
+    "src_folders": ["test/e2e/specs"],
+    "selenium":{
+        "start_process":true,
+        "server_path": "node_modules/selenium-server/lib/runner/selenium-server-standalone-3.3.1.jar",
+        "host": "127.0.0.1",
+        "port": 9538,
+        "cli_args":{
+            "webdriver.chrome.driver": require('chromedriver').path
+        }
+    },
+    "test_settings":{
+        "default": {
+            "selenium_port": 9538,
+            "selenium-host": "127.0.0.1",
+            "silent": true,
+            "globals":{
+                "devServerURL": "http://localhost:8080"
+            }
+        },
+        "chrome":{
+            "desiredCapabilities": {
+                "browserName": "chrome",
+                "javascriptEnabled": true,
+                "acceptSslCerts": true
+            }
+        }
+    }
+}
